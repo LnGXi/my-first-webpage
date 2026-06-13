@@ -23,6 +23,7 @@
             /* 让背景固定不动，防止滚动时露出空白 */
             background-attachment: fixed;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
@@ -111,6 +112,17 @@
             margin: 20px 0;
         }
 
+        /* 北京时间 — 放在页面顶部紫色背景中 */
+        #beijing-time {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-family: "Courier New", monospace;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
         /* 消息提示 */
         #message {
             color: #666;
@@ -121,6 +133,9 @@
     </style>
 </head>
 <body>
+
+    <!-- 北京时间 — 放在紫色背景上方 -->
+    <div id="beijing-time"></div>
 
     <!-- 白色卡片，所有内容都放在里面 -->
     <div class="card">
@@ -143,6 +158,24 @@
 
     <script>
         // ===== 这里是交互逻辑 =====
+
+        // 北京时间实时更新
+        function updateBeijingTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleString('zh-CN', {
+                timeZone: 'Asia/Shanghai',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            document.getElementById('beijing-time').innerText = '🕐 北京时间 ' + timeStr;
+        }
+        updateBeijingTime();
+        setInterval(updateBeijingTime, 1000);
 
         // count 变量记住当前的数字
         let count = 0;
@@ -169,7 +202,8 @@
                 '🚀 你正在学习网页开发！',
                 '🎨 这个网页是你做的！',
                 '🔥 酷炫吗？',
-                '✨ 代码其实不难吧？'
+                '✨ 代码其实不难吧？',
+                'byDeepSeekV4'
             ];
             // 随机挑一条消息
             const randomIndex = Math.floor(Math.random() * messages.length);

@@ -7,12 +7,21 @@
     <style>
         /* ===== 这里控制颜色和样式 ===== */
 
+        /* 让 html 也撑满整个屏幕 */
+        html {
+            height: 100%;
+        }
+
         /* 整个页面的背景：渐变色（从左上角的紫色变到右下角的蓝色） */
         body {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
+            min-height: 100%;
+            /* 下面这行是备用方案：较新浏览器用 dvh 解决 Safari 留白问题 */
+            min-height: 100dvh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* 让背景固定不动，防止滚动时露出空白 */
+            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;

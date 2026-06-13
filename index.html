@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个网页</title>
+    <style>
+        /* ===== 这里控制颜色和样式 ===== */
+
+        /* 整个页面的背景：渐变色（从左上角的紫色变到右下角的蓝色） */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+
+        /* 中间的白色卡片 */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            /* 卡片出现的动画：从下方浮上来 */
+            animation: floatUp 0.8s ease-out;
+        }
+
+        /* 定义"从下往上浮"的动画 */
+        @keyframes floatUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 大标题 */
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+            /* 文字渐变色 */
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 副标题 */
+        .subtitle {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* 三个功能按钮的容器 */
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* 按钮的通用样式 */
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* 三个不同颜色的按钮 */
+        .btn-purple { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .btn-pink   { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .btn-blue   { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+
+        /* 鼠标悬停时按钮变大一点点 */
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 计数器显示 */
+        #count {
+            font-size: 48px;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+
+        /* 消息提示 */
+        #message {
+            color: #666;
+            font-size: 14px;
+            margin-top: 20px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 白色卡片，所有内容都放在里面 -->
+    <div class="card">
+        <h1>🎉 你好，世界！</h1>
+        <p class="subtitle">这是我的第一个网页，是不是很酷？</p>
+
+        <!-- 计数器数字 -->
+        <div id="count">0</div>
+
+        <!-- 三个按钮 -->
+        <div class="buttons">
+            <button class="btn btn-purple" onclick="addOne()">➕ 加一</button>
+            <button class="btn btn-pink"   onclick="resetCount()">🔄 归零</button>
+            <button class="btn btn-blue"   onclick="surprise()">✨ 惊喜</button>
+        </div>
+
+        <!-- 消息区域 -->
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // ===== 这里是交互逻辑 =====
+
+        // count 变量记住当前的数字
+        let count = 0;
+
+        // 加一按钮：数字+1，然后更新显示
+        function addOne() {
+            count = count + 1;
+            document.getElementById('count').innerText = count;
+            document.getElementById('message').innerText = '';
+        }
+
+        // 归零按钮：数字变回0
+        function resetCount() {
+            count = 0;
+            document.getElementById('count').innerText = count;
+            document.getElementById('message').innerText = '已归零 ✅';
+        }
+
+        // 惊喜按钮：显示一条随机消息
+        function surprise() {
+            const messages = [
+                '🌟 你好棒！',
+                '💪 继续加油！',
+                '🚀 你正在学习网页开发！',
+                '🎨 这个网页是你做的！',
+                '🔥 酷炫吗？',
+                '✨ 代码其实不难吧？'
+            ];
+            // 随机挑一条消息
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            document.getElementById('message').innerText = messages[randomIndex];
+        }
+    </script>
+
+</body>
+</html>
